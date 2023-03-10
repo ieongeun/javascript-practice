@@ -1,13 +1,29 @@
-function runInDelay(seconds) {
-    return new Promise((resolve, reject) => {
-        if (!seconds || seconds < 0) {
-            reject(new Error('seconds가 0보다 작음'))
-        }
-        setTimeout(resolve, seconds * 1000);
+function getBanana() {
+    return new Promise((resolve) => {
+        setTimeout(()=> {
+            resolve('🍌');
+        }, 1000);
     });
 }
 
-runInDelay(2)
-.then(()=>console.log('타이머완료'))
-.catch(console.error)
-.finally(()=>console.log('끝!'))
+function getApple() {
+    return new Promise((resolve)=>{
+        setTimeout(() => {
+            resolve('🍎');
+        }, 3000);
+    })
+}
+
+function getOrange() {
+    return Promise.reject(new Error('no 🍊'));
+}
+
+Promise.all([getBanana(), getApple()])
+    .then(console.log);
+
+Promise.race([getBanana(), getApple()])
+    .then(console.log);
+
+Promise.allSettled([getBanana(), getApple(), getOrange()])
+    .then(console.log)
+    .catch(console.error);
