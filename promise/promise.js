@@ -24,6 +24,6 @@ Promise.all([getBanana(), getApple()])
 Promise.race([getBanana(), getApple()])
     .then(console.log);
 
-Promise.allSettled([getBanana(), getApple(), getOrange()])
+Promise.all([getBanana(), getApple(), getOrange()])
     .then(console.log)
     .catch(console.error);
